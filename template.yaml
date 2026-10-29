@@ -1,0 +1,92 @@
+# Metadatos de la plantilla para el catálogo de NoExpertise.
+id: bodega-vinos
+nombre: Bodega y enoturismo
+descripcion: "Web clásica en burdeos, negro y oro para bodegas y enoturismo: historia, vinos, visitas con cata y venta."
+sectores:
+  - { id: bodega, nombre: Bodega }
+  - { id: vinos, nombre: Vinos }
+  - { id: enoturismo, nombre: Enoturismo }
+  - { id: destileria, nombre: Destilería }
+  - { id: cerveceria-artesanal, nombre: Cervecería artesanal }
+  - { id: almazara, nombre: Almazara }
+secciones:
+  - { id: hero, nombre: Portada }
+  - { id: historia, nombre: Historia }
+  - { id: vinos, nombre: Vinos }
+  - { id: enoturismo, nombre: Visitas y catas }
+  - { id: puntos-venta, nombre: Dónde comprar }
+  - { id: galeria, nombre: Fotos }
+  - { id: opiniones, nombre: Opiniones }
+  - { id: preguntas, nombre: Preguntas frecuentes }
+  - { id: contacto, nombre: Contacto }
+estilo: clasico
+plan_minimo: presencia
+version: 1.0.0
+base: astrowind
+demo_url: https://demo-plantilla-bodega-vinos.noexpertise.com
+activa: true
+orden: 320
+
+# Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
+# tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.
+asistente:
+  - id: negocio
+    titulo: "Tu bodega"
+    pregunta: "¿Cómo se llama tu bodega y qué hacéis? Dónde estáis, qué uva trabajáis y qué os hace distintos."
+    ayuda: "Por ejemplo: bodega familiar en tal pueblo, vinos de crianza, visitas con cata."
+    tipo: texto
+    campos: [nombre, eslogan, seo.titulo, seo.descripcion, secciones.hero.antetitulo, secciones.hero.titulo, secciones.hero.texto]
+  - id: contacto
+    titulo: "Cómo te encuentran"
+    pregunta: "¿Dónde está la bodega, qué horario tenéis y cómo os pueden llamar o escribir?"
+    ayuda: "Solo lo que quieras que vean tus clientes. Lo que dejes vacío no sale en tu web."
+    tipo: datos
+    campos: [contacto.telefono, contacto.whatsapp, contacto.email, contacto.direccion, contacto.horario, redes.instagram, redes.facebook]
+  - id: historia
+    titulo: "Vuestra historia"
+    pregunta: "Cuéntame la historia de la bodega: quién la empezó, quién la lleva hoy y cómo trabajáis la viña y el vino."
+    tipo: texto
+    campos: [secciones.historia.titulo, secciones.historia.declaracion, secciones.historia.texto]
+  - id: hitos
+    titulo: "Las fechas importantes"
+    pregunta: "¿Qué años marcaron la bodega? Uno por línea: el año y qué pasó."
+    ayuda: "Por ejemplo: 1921, primera viña. Si lo prefieres, añádelas luego en Contenido."
+    tipo: lista
+    campos: [secciones.historia.hitos]
+  - id: vinos
+    titulo: "Tus vinos"
+    pregunta: "Cuéntame los vinos que hacéis: uno por línea, con el tipo (tinto, blanco, rosado, espumoso), la añada y el precio si quieres."
+    ayuda: "Si lo prefieres, añádelos luego en Contenido con su foto."
+    tipo: lista
+    campos: [secciones.vinos.vinos]
+  - id: visitas
+    titulo: "Visitas y catas"
+    pregunta: "¿Qué visitas o catas ofrecéis? Una por línea, con lo que dura y el precio si quieres."
+    ayuda: "Si no hacéis visitas, salta este paso y oculta el apartado en Contenido."
+    tipo: lista
+    campos: [secciones.enoturismo.visitas]
+  - id: puntos-venta
+    titulo: "Dónde comprar"
+    pregunta: "¿Dónde se pueden comprar vuestros vinos? En la bodega, tiendas, restaurantes, envíos…"
+    tipo: texto
+    campos: [secciones.puntos-venta.titulo, secciones.puntos-venta.texto, secciones.puntos-venta.items]
+  - id: preguntas
+    titulo: "Preguntas frecuentes"
+    pregunta: "¿Qué os preguntan más a menudo? Escribe cada pregunta y lo que respondéis."
+    ayuda: "Por ejemplo: si hay que reservar, si se puede ir con niños o si enviáis vino."
+    tipo: lista
+    campos: [secciones.preguntas.preguntas]
+  - id: fotos
+    titulo: "Tus fotos"
+    pregunta: "Pon una foto de portada (la viña o la bodega) y, si quieres, alguna más."
+    ayuda: "Sube las tuyas o elige una del banco. Las que no cambies se quedan como están."
+    tipo: fotos
+    campos: [secciones.hero.imagen, secciones.historia.imagen, secciones.enoturismo.imagen, secciones.galeria.galeria, secciones.contacto.imagen]
+  - id: aspecto
+    titulo: "Colores y logo"
+    pregunta: "Elige los colores de tu web y, si tienes, tu logo."
+    tipo: eleccion
+    campos: [colores.primario, colores.acento, logo]
+  - id: repaso
+    titulo: "Repaso"
+    tipo: repaso

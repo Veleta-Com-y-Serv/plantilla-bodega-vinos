@@ -1,0 +1,56 @@
+---
+// Enoturismo, en banda marfil partida: foto a sangre a la izquierda (`imagen`, toca el borde de la ventana; arriba en
+// móvil) y, a la derecha, el titular y las `visitas` [{nombre, duracion, precio, texto}] en filas con filetes dorados,
+// con el botón (`cta`, normalmente al formulario de contacto) y la `nota`. Sin precio no hay precio; sin duración,
+// no hay reloj. Sin foto, el texto ocupa el ancho.
+import { seccion, externo } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const visitas = s ? s.visitas : [];
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} fondo="marfil" relleno={false} contenedor={false}>
+      <div class:list={['partida', { 'partida--sola': !s.imagen }]}>
+        {s.imagen && (
+          <div class="partida-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={1400} />
+          </div>
+        )}
+        <div class:list={['partida-texto', s.imagen ? 'partida-texto--der' : '']}>
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} class="!mb-0" />
+          {visitas.length > 0 && (
+            <ul class="visitas">
+              {visitas.map((v) => (
+                <li class="visita">
+                  <div class="visita-cabeza">
+                    <h3 class="visita-nombre">{v.nombre}</h3>
+                    {v.precio && <p class="visita-precio">{v.precio}</p>}
+                  </div>
+                  {v.duracion && (
+                    <p class="visita-duracion">
+                      <Icono nombre="reloj" tam={15} /> <span class="sr-only">Duración:</span> {v.duracion}
+                    </p>
+                  )}
+                  {v.texto && <p class="visita-texto">{v.texto}</p>}
+                </li>
+              ))}
+            </ul>
+          )}
+          {s.cta?.url && (
+            <a class="btn btn--vino mt-10" href={s.cta.url} {...(externo(s.cta.url) && { rel: 'noopener', target: '_blank' })}>
+              {s.cta.texto}
+            </a>
+          )}
+          {s.nota && <p class="nota">{s.nota}</p>}
+        </div>
+      </div>
+    </Seccion>
+  )
+}

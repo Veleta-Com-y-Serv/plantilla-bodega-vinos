@@ -1,0 +1,11 @@
+---
+// Banda de sección a todo el ancho. Adaptado de AstroWind (WidgetWrapper.astro), © onWidget, licencia MIT (LICENSE-ASTROWIND.md).
+// `fondo`: negro, vino, marfil u oro. Da el id del ancla y el ritmo vertical; el contenido va en un contenedor de
+// hasta 90 rem con 16 px de margen lateral en móvil (`contenedor={false}` para meter bandas a sangre dentro).
+interface Props { id?: string; class?: string; fondo?: 'negro' | 'vino' | 'marfil' | 'oro'; relleno?: boolean; contenedor?: boolean; etiqueta?: string }
+const { id, class: clase = '', fondo = 'marfil', relleno = true, contenedor = true, etiqueta } = Astro.props;
+---
+
+<section class:list={['banda', `banda--${fondo}`, { 'banda--sin-relleno': !relleno }, clase]} id={id} aria-label={etiqueta}>
+  {contenedor ? <div class="contenedor"><slot /></div> : <slot />}
+</section>

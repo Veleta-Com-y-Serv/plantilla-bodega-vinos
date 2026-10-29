@@ -1,0 +1,26 @@
+---
+// Titular de sección (antetítulo con filete dorado + título grande en serif + texto).
+// Adaptado de AstroWind (Headline.astro), © onWidget, MIT. `alinear`: izquierda, centro o partido (título | texto).
+interface Props { titulo?: string; antetitulo?: string; texto?: string; alinear?: 'izquierda' | 'centro' | 'partido'; class?: string; nivel?: 1 | 2 }
+const { titulo, antetitulo, texto, alinear = 'izquierda', class: clase = '', nivel = 2 } = Astro.props;
+const H = nivel === 1 ? 'h1' : 'h2';
+---
+
+{
+  (titulo || antetitulo || texto) &&
+    (alinear === 'partido' ? (
+      <div class:list={['titular titular--partido', clase]}>
+        <div>
+          {antetitulo && <p class="antetitulo">{antetitulo}</p>}
+          {titulo && <H class="titulo">{titulo}</H>}
+        </div>
+        {texto && <p class="titular-texto">{texto}</p>}
+      </div>
+    ) : (
+      <div class:list={['titular', { 'titular--centro': alinear === 'centro' }, clase]}>
+        {antetitulo && <p class="antetitulo">{antetitulo}</p>}
+        {titulo && <H class="titulo">{titulo}</H>}
+        {texto && <p class="titular-texto">{texto}</p>}
+      </div>
+    ))
+}

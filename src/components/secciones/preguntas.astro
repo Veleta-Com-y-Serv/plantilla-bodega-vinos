@@ -1,0 +1,32 @@
+---
+// Preguntas frecuentes, en banda marfil a todo el ancho: titular a la izquierda (fijo al bajar en escritorio) y
+// acordeón nativo <details> con filetes dorados a la derecha, sin JavaScript. Campos: `preguntas[]` (pregunta,
+// respuesta). Sin preguntas no se pinta. También sirve de diseño para apartados nuevos (`tipo: preguntas`).
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const preguntas = s ? s.preguntas.filter((p) => p && p.pregunta) : [];
+---
+
+{
+  s && preguntas.length > 0 && (
+    <Seccion id={Astro.props.id} fondo="marfil">
+      <div class="faq-rejilla">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        <div class="faq-lista">
+          {preguntas.map((p) => (
+            <details class="faq">
+              <summary>
+                <span>{p.pregunta}</span>
+                <span class="faq-signo" aria-hidden="true">+</span>
+              </summary>
+              {p.respuesta && <p class="faq-respuesta">{p.respuesta}</p>}
+            </details>
+          ))}
+        </div>
+      </div>
+    </Seccion>
+  )
+}

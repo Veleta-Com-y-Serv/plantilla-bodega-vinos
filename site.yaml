@@ -1,0 +1,147 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+# Listas siempre planas (nunca una lista dentro de un elemento de lista). Precios siempre entre comillas.
+nombre: Bodegas Ocáriz
+eslogan: Vinos de Rioja criados en un calado de piedra a las afueras de Haro.
+sector: bodega
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = nombre en texto.
+colores:
+  primario: "#6b1424"
+  acento: "#c8a24a"
+  fondo: "#f3ede2"
+  texto: "#1c1416"
+contacto:
+  telefono: "941 30 18 52"
+  email: visitas@bodegasocariz.es
+  direccion: Camino de las Viñas 14, 26200 Haro (La Rioja)
+  horario: "De martes a sábado, de 10:00 a 14:00 y de 16:00 a 19:00. Domingos, de 10:00 a 14:00."
+  whatsapp: "+34 633 41 72 09"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: https://www.facebook.com/
+  linkedin: ""
+menu:
+  - { texto: La bodega, url: "/#historia" }
+  - { texto: Vinos, url: "/#vinos" }
+  - { texto: Visitas, url: "/#enoturismo" }
+  - { texto: Dónde comprar, url: "/#puntos-venta" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: Reservar visita, url: "/#contacto" }
+aviso_edad: "Bebe con moderación. Venta de vino solo a mayores de 18 años."
+seo:
+  titulo: Bodegas Ocáriz · Bodega familiar y visitas con cata en Haro
+  descripcion: "Bodega familiar de Rioja en Haro: tintos de crianza y reserva, clarete y blanco en barrica. Visitas al calado con cata y venta en la propia bodega."
+  tipo: Winery
+marca_pie: true
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: "Haro · Rioja Alta"
+    titulo: Cuatro generaciones criando vino bajo tierra
+    texto: "Tempranillo y garnacha de nuestras viñas de Haro, criados sin prisa en un calado excavado a mano. Ven a conocerlo y cata con nosotros."
+    imagen: /fotos/hero.jpg
+    cta: { texto: Reservar una visita, url: "/#enoturismo" }
+    cta_secundario: { texto: Ver los vinos, url: "/#vinos" }
+    items:
+      - { titulo: Denominación de Origen Calificada Rioja }
+      - { titulo: Calado del siglo XIX }
+      - { titulo: Visitas con cata todo el año }
+
+  historia:
+    activa: true
+    antetitulo: La bodega
+    titulo: Una familia, un calado y unas pocas viñas
+    declaracion: "El vino se hace en la viña. En la bodega solo le damos tiempo."
+    texto: |
+      Celestino Ocáriz compró la primera viña en 1921, junto al río Tirón, y excavó a pico un calado bajo la casa para guardar el vino del año.
+
+      Hoy la llevan sus bisnietas, Ana en la viña y Lucía en la bodega. Seguimos vendimiando a mano, en cajas pequeñas, y criando en barrica de roble en el mismo calado de piedra.
+
+      Hacemos poco vino, de doce hectáreas propias repartidas en tres parajes de Haro.
+    imagen: /fotos/historia.jpg
+    hitos:
+      - { anio: "1921", titulo: La primera viña, texto: "Celestino compra dos hectáreas junto al Tirón y excava el calado." }
+      - { anio: "1958", titulo: Vino con nombre, texto: "Embotellamos por primera vez con el apellido de la familia." }
+      - { anio: "1987", titulo: La nave nueva, texto: "Depósitos de acero y una sala de barricas sobre el calado." }
+      - { anio: "2009", titulo: Puertas abiertas, texto: "Empezamos a enseñar la bodega y a catar con quien nos visita." }
+      - { anio: "2021", titulo: Viñedo ecológico, texto: "Las doce hectáreas pasan a cultivo ecológico certificado." }
+
+  vinos:
+    activa: true
+    antetitulo: Nuestros vinos
+    titulo: De la viña a la botella, sin atajos
+    texto: "Seis vinos, todos de uva propia. Precios por botella en la tienda de la bodega."
+    marca_destacado: Recomendado
+    vinos:
+      - { nombre: Ocáriz Clarete, tipo: Rosado, anada: "2024", variedad: "Garnacha y viura", texto: "El vino de la fiesta de Haro: fresco, ligero y con fruta roja.", precio: "8,50 €", imagen: /fotos/vino-rosado.jpg, destacado: false }
+      - { nombre: Ocáriz Blanco Barrica, tipo: Blanco, anada: "2023", variedad: "Viura y malvasía", texto: "Fermentado en barrica de roble francés, con sus lías durante seis meses.", precio: "14,00 €", imagen: /fotos/vino-blanco.jpg, destacado: false }
+      - { nombre: Ocáriz Joven, tipo: Tinto, anada: "2024", variedad: Tempranillo, texto: "Maceración carbónica, como se ha hecho siempre en la Rioja Alta.", precio: "7,50 €", imagen: /fotos/vino-joven.jpg, destacado: false }
+      - { nombre: Ocáriz Reserva, tipo: Tinto, anada: "2019", variedad: "Tempranillo y graciano", texto: "Dos años en barrica en el calado y uno en botella antes de salir.", precio: "21,00 €", imagen: /fotos/vino-reserva.jpg, destacado: true }
+      - { nombre: Gran Reserva Celestino, tipo: Tinto, anada: "2015", variedad: "Tempranillo, garnacha y mazuelo", texto: "Solo en las mejores añadas. Elegante, largo, para guardar.", precio: "39,00 €", imagen: /fotos/vino-gran-reserva.jpg, destacado: false }
+      - { nombre: Ocáriz Brut Nature, tipo: Espumoso, anada: "2021", variedad: "Viura y tempranillo blanco", texto: "Método tradicional, treinta meses en rima en el calado.", precio: "18,50 €", imagen: /fotos/vino-espumoso.jpg, destacado: false }
+    cta: { texto: Pedir vino por WhatsApp, url: "https://wa.me/34633417209?text=Hola%2C%20quiero%20pedir%20vino" }
+
+  enoturismo:
+    activa: true
+    antetitulo: Enoturismo
+    titulo: Baja al calado y cata con nosotras
+    texto: "Las visitas las hacemos nosotras, en grupos pequeños. Recorremos la viña o la nave, bajamos al calado y terminamos con una cata en la sala de barricas."
+    imagen: /fotos/enoturismo.jpg
+    visitas:
+      - { nombre: Visita clásica con cata, duracion: "1 h 30 min", precio: "18 €", texto: "Nave, calado y cata comentada de tres vinos con pan y aceite de la zona." }
+      - { nombre: El calado al atardecer, duracion: "2 h", precio: "28 €", texto: "Viernes y sábados a última hora: cata de cuatro vinos entre barricas, con embutido y queso." }
+      - { nombre: Paseo por la viña y almuerzo, duracion: "3 h", precio: "45 €", texto: "Paseo por el paraje de La Cuesta, almuerzo riojano en el merendero y cata de cinco vinos." }
+      - { nombre: Cata privada para grupos, duracion: "2 h", precio: "Consultar", texto: "Para empresas, celebraciones o grupos de amigos, de 10 a 30 personas." }
+    cta: { texto: Reservar una visita, url: "/#contacto" }
+    nota: "Niños gratis, con zumo de uva. Visitas en castellano, inglés y francés."
+
+  puntos-venta:
+    activa: true
+    antetitulo: Dónde comprar
+    titulo: Llévate el vino a casa
+    texto: "Vendemos en la bodega y en unas pocas tiendas que conocemos bien. Si no te pilla cerca, te lo mandamos."
+    items:
+      - { titulo: Tienda de la bodega, texto: "En el mismo camino de las Viñas, de martes a domingo.", icono: botella, url: "/#contacto" }
+      - { titulo: Vinotecas de Haro y Logroño, texto: "Pregúntanos cuál te queda más cerca.", icono: copa, url: "" }
+      - { titulo: Restaurantes de la Rioja Alta, texto: "En la carta de vinos de casas de comidas de la comarca.", icono: cubiertos, url: "" }
+      - { titulo: Envíos a toda la Península, texto: "Cajas de 3, 6 o 12 botellas. Pídelo por WhatsApp o por correo.", icono: caja, url: "/#contacto" }
+
+  galeria:
+    activa: true
+    antetitulo: Fotos
+    titulo: La viña, el calado y la sala de catas
+    galeria:
+      - /fotos/galeria-1.jpg
+      - /fotos/galeria-2.jpg
+      - /fotos/galeria-3.jpg
+      - /fotos/galeria-4.jpg
+      - /fotos/galeria-5.jpg
+
+  opiniones:
+    activa: true
+    antetitulo: Opiniones
+    titulo: Quien baja al calado, vuelve
+    testimonios:
+      - { texto: "La mejor visita que hicimos en Haro. Lucía te lo explica todo con unas ganas que se contagian, y el reserva es una maravilla.", autor: Marta y Jorge, nota: Google }
+      - { texto: "Bodega pequeña y auténtica, nada de turismo de masas. La cata al atardecer en el calado, inolvidable.", autor: Íñigo L., nota: Google }
+      - { texto: "Pedimos dos cajas para casa y llegaron enseguida, bien embaladas. El clarete ya es fijo en verano.", autor: Carmen R. }
+
+  preguntas:
+    activa: true
+    antetitulo: Preguntas frecuentes
+    titulo: Antes de venir a la bodega
+    preguntas:
+      - { pregunta: "¿Hace falta reservar la visita?", respuesta: "Sí, porque los grupos son pequeños. Escríbenos por WhatsApp o con el formulario y te confirmamos el día y la hora." }
+      - { pregunta: "¿Se puede venir con niños?", respuesta: "Claro. Los niños entran gratis y, mientras los mayores catan, les damos zumo de uva de nuestras viñas." }
+      - { pregunta: "¿Puedo comprar vino en la bodega sin hacer la visita?", respuesta: "Sí. La tienda abre en el horario de la bodega y no hace falta avisar." }
+      - { pregunta: "¿Enviáis vino a domicilio?", respuesta: "Sí, a toda la Península, en cajas de 3, 6 o 12 botellas. Pídelo por WhatsApp o por correo y te decimos lo que cuesta el envío." }
+      - { pregunta: "¿Cómo se llega a la bodega?", respuesta: "Está a cinco minutos en coche del centro de Haro, saliendo por el camino de las Viñas. Hay aparcamiento en la propia bodega." }
+
+  contacto:
+    activa: true
+    antetitulo: Visitas y pedidos
+    titulo: Reserva tu visita
+    texto: "Dinos qué visita te apetece, qué día y cuántos sois. Te contestamos en el día."
+    imagen: /fotos/contacto.jpg

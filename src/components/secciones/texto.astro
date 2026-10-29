@@ -1,0 +1,56 @@
+---
+// Apartado de texto genérico, en banda marfil a todo el ancho: con `imagen`, mitad foto a sangre y mitad texto;
+// sin foto, titular a la izquierda y párrafos a la derecha. `items` en lista con filetes dorados y `cta` opcional.
+// Lo usan los apartados nuevos que pide el cliente (site.yaml: `tipo: texto`).
+import { seccion, parrafos, externo } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Seccion from '../ui/Seccion.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const items = s ? s.items.filter((it) => it && it.titulo) : [];
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} fondo="marfil" relleno={false} contenedor={false}>
+      <div class:list={['partida', { 'partida--sola': !s.imagen }]}>
+        {s.imagen && (
+          <div class="partida-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={1200} />
+          </div>
+        )}
+        <div class:list={['partida-texto', { 'partida-texto--der': s.imagen }]}>
+          <div class:list={[{ 'lg:grid lg:grid-cols-[5fr_7fr] lg:gap-20': !s.imagen }]}>
+            <div>
+              {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+              {s.titulo && <h2 class="titulo">{s.titulo}</h2>}
+            </div>
+            <div>
+              {parrafos(s.texto).length > 0 && (
+                <div class="parrafos">
+                  {parrafos(s.texto).map((p) => <p>{p}</p>)}
+                </div>
+              )}
+              {items.length > 0 && (
+                <ul class="lista-filetes">
+                  {items.map((it) => (
+                    <li>
+                      <p class="font-display text-xl">{it.titulo}</p>
+                      {it.texto && <p class="mt-1 opacity-80">{it.texto}</p>}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {s.cta?.url && (
+                <a class="btn btn--vino mt-10" href={s.cta.url} {...(externo(s.cta.url) && { rel: 'noopener', target: '_blank' })}>
+                  {s.cta.texto}
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </Seccion>
+  )
+}

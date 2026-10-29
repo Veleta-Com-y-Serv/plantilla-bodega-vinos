@@ -1,0 +1,281 @@
+/* Bodega y enoturismo — estilo clásico: serif de sistema de alto contraste (Bodoni/Didot si están, Constantia o
+   Georgia si no), sans humanista para el texto, burdeos + negro + oro, filetes dorados finos y años y añadas en
+   cursiva grande como en una etiqueta de vino. Todo son bandas de borde a borde que alternan negro, burdeos, marfil
+   y oro; fotos a sangre en mitades 50/50 y mosaico sin márgenes.
+   Todo sale de las cuatro variables de color de site.yaml (--c-primario, --c-acento, --c-fondo, --c-texto). */
+@import "tailwindcss";
+@import "./comun.css";
+@config "../../tailwind.config.mjs";
+
+:root {
+  --fuente-titulos: "Bodoni 72", Didot, "Bodoni MT", "Big Caslon", Constantia, "Hoefler Text", Georgia, serif;
+  --fuente-texto: "Gill Sans", "Gill Sans MT", Seravek, Calibri, "Trebuchet MS", system-ui, sans-serif;
+  --radio: 0; --ritmo: 4.5rem; --ritmo-md: 7.5rem; --ancho: 90rem;
+  /* Derivados (siguen funcionando si el cliente cambia los colores) */
+  --negro: color-mix(in srgb, var(--c-primario) 12%, #0b0909);
+  --vino: color-mix(in srgb, var(--c-primario) 86%, #000);
+  --vino-oscuro: color-mix(in srgb, var(--c-primario) 42%, #0b0909);
+  --claro: color-mix(in srgb, var(--c-fondo) 55%, #fff);
+  --oro-legible: color-mix(in srgb, var(--c-acento) 48%, var(--c-texto));
+  --filete-oro: color-mix(in srgb, var(--c-acento) 55%, transparent);
+  --filete-claro: rgb(255 255 255 / .16);
+  --alto-cabecera: 4.75rem;
+  /* Margen lateral del texto: 16 px en móvil; en pantallas grandes, alineado con el contenedor de 90 rem */
+  --margen: 1rem;
+}
+@media (min-width: 768px) { :root { --margen: 2rem; } }
+@media (min-width: 1280px) { :root { --margen: max(3rem, calc((100vw - 90rem) / 2 + 3rem)); } }
+
+@layer base {
+  body { font-family: var(--fuente-texto); font-size: 1.05rem; line-height: 1.65; background: var(--c-fondo); }
+  h1, h2, h3 { font-family: var(--fuente-titulos); font-weight: 400; letter-spacing: -0.01em; line-height: 1.06; }
+  :focus-visible { outline: 2px solid var(--c-primario); outline-offset: 3px; }
+  .banda--negro :focus-visible, .banda--vino :focus-visible, .portada :focus-visible, .cabecera :focus-visible, .pie :focus-visible { outline-color: var(--c-acento); }
+  main { padding-top: var(--alto-cabecera); }
+  main:has(> .portada:first-child) { padding-top: 0; }
+}
+
+@layer components {
+  @media (min-width: 1280px) { .contenedor { padding-inline: 3rem; } }
+
+  /* Bandas a todo el ancho */
+  .banda { position: relative; padding-block: var(--ritmo); }
+  @media (min-width: 768px) { .banda { padding-block: var(--ritmo-md); } }
+  .banda--negro { background: var(--negro); color: var(--claro); }
+  .banda--vino { background: var(--vino); color: var(--claro); }
+  .banda--marfil { background: var(--c-fondo); color: var(--c-texto); }
+  .banda--oro { background: var(--c-acento); color: var(--negro); }
+  .banda--sin-relleno { padding-block: 0; }
+
+  /* Titulares */
+  .antetitulo { display: inline-flex; align-items: center; gap: .9rem; font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .32em; color: var(--oro-legible); }
+  .antetitulo::before { content: ""; flex: none; width: 2.5rem; height: 1px; background: currentColor; }
+  .banda--negro .antetitulo, .banda--vino .antetitulo, .portada .antetitulo, .pie .antetitulo { color: var(--c-acento); }
+  .banda--oro .antetitulo { color: var(--negro); }
+  .titulo { margin-top: 1rem; font-size: clamp(2.3rem, 5.4vw, 4.75rem); }
+  .banda--marfil .titulo { color: var(--c-primario); }
+  .titular { max-width: 46rem; margin-bottom: 3rem; }
+  @media (min-width: 768px) { .titular { margin-bottom: 4rem; } }
+  .titular--centro { margin-inline: auto; text-align: center; }
+  .titular--centro .antetitulo::after { content: ""; flex: none; width: 2.5rem; height: 1px; background: currentColor; }
+  .titular-texto { margin-top: 1.25rem; font-size: 1.12rem; opacity: .85; }
+  /* Titular partido: título a la izquierda y texto a la derecha, a todo el ancho */
+  .titular--partido { max-width: none; display: grid; gap: 1.25rem; align-items: end; }
+  @media (min-width: 1024px) { .titular--partido { grid-template-columns: 7fr 5fr; gap: 5rem; } .titular--partido .titular-texto { margin-top: 0; } }
+  .font-display { font-family: var(--fuente-titulos); }
+  .cursiva { font-family: var(--fuente-titulos); font-style: italic; }
+
+  /* Botones: rectángulo dorado con letras espaciadas */
+  .btn, .btn-sec { border-radius: 0; border: 1px solid; font-size: .76rem; font-weight: 600; text-transform: uppercase; letter-spacing: .2em; padding: .95rem 1.9rem; min-height: 3.1rem; max-width: 100%; }
+  .btn { background: var(--c-acento); border-color: var(--c-acento); color: var(--negro); }
+  .btn:hover { background: var(--claro); border-color: var(--claro); }
+  .btn-sec { background: transparent; border-color: currentColor; color: inherit; }
+  .btn-sec:hover { background: var(--claro); border-color: var(--claro); color: var(--negro); }
+  .btn--vino { background: var(--c-primario); border-color: var(--c-primario); color: #fff; }
+  .btn--vino:hover { background: var(--negro); border-color: var(--negro); color: var(--claro); }
+  .banda--marfil .btn-sec:hover { background: var(--c-primario); border-color: var(--c-primario); color: #fff; }
+  .banda--oro .btn { background: var(--negro); border-color: var(--negro); color: var(--claro); }
+
+  /* Cabecera fija; transparente sobre la portada (clase sobre-portada que pone Header.astro) */
+  .cabecera--bodega { position: fixed; top: 0; left: 0; right: 0; background: var(--negro); color: var(--claro); border-bottom: 1px solid var(--filete-oro); transition: background-color .3s ease, border-color .3s ease; }
+  .cabecera--bodega .cabecera-fila { max-width: none; padding-inline: var(--margen); min-height: var(--alto-cabecera); gap: 1.5rem; }
+  .cabecera--bodega .marca-nombre { font-family: var(--fuente-titulos); font-size: 1.12rem; text-transform: uppercase; letter-spacing: .2em; }
+  .cabecera--bodega .marca::before { content: ""; flex: none; width: .55rem; height: .55rem; background: var(--c-acento); transform: rotate(45deg); }
+  .cabecera--bodega .marca:has(img)::before { display: none; }
+  .cabecera--bodega .cabecera-nav { gap: 2rem; }
+  .cabecera--bodega .cabecera-nav a { font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .22em; padding-block: .4rem; border-bottom: 1px solid transparent; }
+  .cabecera--bodega .cabecera-nav a:hover { border-bottom-color: var(--c-acento); color: var(--c-acento); }
+  .cabecera--bodega .cabecera-cta { min-height: 2.75rem; padding: .6rem 1.2rem; }
+  .cabecera--bodega .menu-movil summary { min-height: 2.75rem; padding-inline: .25rem; font-size: .74rem; text-transform: uppercase; letter-spacing: .2em; }
+  .cabecera--bodega .menu-movil-panel { padding: .5rem var(--margen) 1.5rem; background: var(--negro); color: var(--claro); border-bottom: 1px solid var(--filete-oro); box-shadow: 0 24px 40px rgb(0 0 0 / .35); }
+  .cabecera--bodega .menu-movil-panel a { padding-block: 1rem; font-family: var(--fuente-titulos); font-size: 1.35rem; border-bottom-color: var(--filete-claro); }
+  .cabecera--bodega .menu-movil-panel .btn { font-family: var(--fuente-texto); font-size: .76rem; }
+  html.sobre-portada .cabecera--bodega { background: linear-gradient(rgb(0 0 0 / .55), transparent); border-bottom-color: transparent; }
+  html.sobre-portada .cabecera--bodega:has(.menu-movil[open]) { background: var(--negro); }
+
+  /* Portada a pantalla completa con foto a sangre y marco dorado de etiqueta */
+  .portada { position: relative; isolation: isolate; overflow: hidden; display: flex; align-items: flex-end; min-height: 100vh; min-height: 100svh; background: var(--negro); color: #fff; }
+  .portada-fondo { position: absolute; inset: 0; z-index: -2; }
+  .portada-fondo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(0 0 0 / .55) 0%, rgb(0 0 0 / .08) 34%, color-mix(in srgb, var(--negro) 94%, transparent) 100%), linear-gradient(90deg, rgb(0 0 0 / .5), transparent 70%); }
+  @media (min-width: 768px) {
+    .portada::before { content: ""; position: absolute; z-index: -1; inset: calc(var(--alto-cabecera) + .75rem) 1.25rem 1.25rem; border: 1px solid var(--filete-oro); pointer-events: none; }
+  }
+  .portada-contenido { width: 100%; padding: calc(var(--alto-cabecera) + 4rem) var(--margen) 3.5rem; display: grid; gap: 2.5rem; align-items: end; }
+  @media (min-width: 768px) { .portada-contenido { padding-bottom: 5rem; } }
+  @media (min-width: 1024px) { .portada-contenido { grid-template-columns: minmax(0, 1fr) 19rem; gap: 5rem; } }
+  .portada-titulo { margin-top: 1.4rem; max-width: 19ch; font-size: clamp(2.75rem, 7.2vw, 7rem); line-height: .98; text-shadow: 0 2px 40px rgb(0 0 0 / .35); }
+  .portada-texto { margin-top: 1.6rem; max-width: 36rem; font-size: 1.15rem; opacity: .92; }
+  .portada-ficha { border-top: 1px solid var(--filete-oro); }
+  @media (min-width: 1024px) { .portada-ficha { border-top: 0; border-left: 1px solid var(--filete-oro); } }
+  .portada-ficha li { display: flex; align-items: center; gap: .9rem; padding: .95rem 0; font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .22em; border-bottom: 1px solid var(--filete-claro); }
+  @media (min-width: 1024px) { .portada-ficha li { padding-left: 1.5rem; } .portada-ficha li:last-child { border-bottom: 0; } }
+  .portada-ficha li::before { content: ""; flex: none; width: 6px; height: 6px; background: var(--c-acento); transform: rotate(45deg); }
+
+  /* Mitades 50/50 con la foto a sangre (toca el borde de la ventana) */
+  .partida { display: grid; }
+  @media (min-width: 1024px) { .partida { grid-template-columns: 1fr 1fr; } .partida--estrecha { grid-template-columns: 5fr 7fr; } }
+  .partida-foto { position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; }
+  @media (min-width: 768px) { .partida-foto { aspect-ratio: 16 / 9; } }
+  @media (min-width: 1024px) { .partida-foto { aspect-ratio: auto; min-height: 40rem; } }
+  .partida-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .partida-texto { min-width: 0; padding: var(--ritmo) var(--margen); }
+  @media (min-width: 768px) { .partida-texto { padding-block: var(--ritmo-md); } }
+  @media (min-width: 1024px) {
+    .partida-texto--izq { padding-right: 5rem; }
+    .partida-texto--der { padding-left: 5rem; }
+    .partida--foto-der .partida-foto { order: 2; }
+  }
+  .partida--sola { grid-template-columns: 1fr !important; }
+
+  /* Historia */
+  .declaracion { margin-top: 2rem; font-family: var(--fuente-titulos); font-style: italic; font-size: clamp(1.55rem, 2.8vw, 2.3rem); line-height: 1.25; color: var(--c-acento); }
+  .declaracion::before { content: "\201C" / ""; display: block; height: 2.2rem; font-size: 4.5rem; line-height: 1; }
+  .parrafos { margin-top: 1.75rem; display: grid; gap: 1rem; max-width: 40rem; opacity: .9; }
+  .hitos-banda { padding-block: 0 var(--ritmo); }
+  @media (min-width: 768px) { .hitos-banda { padding-bottom: var(--ritmo-md); } }
+  @media (min-width: 1024px) { .hitos-banda { padding-top: 5rem; } }
+  .hitos { position: relative; border-left: 1px solid var(--filete-oro); margin-left: .3rem; }
+  .hito { position: relative; padding: 0 0 2.5rem 1.75rem; }
+  .hito:last-child { padding-bottom: 0; }
+  .hito::before { content: ""; position: absolute; left: -5px; top: 1.1rem; width: 9px; height: 9px; background: var(--c-acento); transform: rotate(45deg); }
+  .hito-anio { display: block; font-family: var(--fuente-titulos); font-style: italic; font-size: clamp(2.6rem, 5vw, 4.25rem); line-height: 1; color: var(--c-acento); font-variant-numeric: lining-nums; }
+  .hito-titulo { margin-top: .6rem; font-size: 1.45rem; }
+  .hito-texto { margin-top: .4rem; font-size: .98rem; opacity: .8; max-width: 22rem; }
+  @media (min-width: 768px) {
+    .hitos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3rem 0; border-left: 0; margin-left: 0; }
+    .hito { padding: 2.25rem 2rem 0 0; border-top: 1px solid var(--filete-oro); }
+    .hito::before { left: 0; top: -5px; }
+  }
+  /* En pantallas grandes, todos en una fila; si hay muchos, la fila se desliza */
+  @media (min-width: 1280px) {
+    .hitos { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(13rem, 1fr); gap: 0; padding-top: .3rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--filete-oro) transparent; }
+    .hito { padding-bottom: 1rem; scroll-snap-align: start; }
+  }
+
+  /* Vinos */
+  .filtro { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 3rem; }
+  .filtro label { display: inline-flex; align-items: center; gap: .6rem; min-height: 2.75rem; padding: .5rem 1.15rem; border: 1px solid var(--filete-claro); font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .2em; cursor: pointer; transition: background-color .15s ease, color .15s ease, border-color .15s ease; }
+  .filtro label:hover { border-color: var(--c-acento); }
+  .filtro input:checked + label { background: var(--c-acento); border-color: var(--c-acento); color: var(--negro); }
+  .filtro input:focus-visible + label { outline: 2px solid var(--c-acento); outline-offset: 3px; }
+  .vinos-lista { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem 1rem; }
+  @media (min-width: 768px) { .vinos-lista { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3.5rem 1.5rem; } }
+  @media (min-width: 1024px) { .vinos-lista { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4.5rem 3rem; } }
+  .vino { --tipo: var(--c-acento); min-width: 0; display: flex; flex-direction: column; }
+  .vino[data-tipo="tinto"] { --tipo: color-mix(in srgb, var(--c-primario) 75%, #fff 10%); }
+  .vino[data-tipo="blanco"] { --tipo: #e8d898; }
+  .vino[data-tipo="rosado"], .vino[data-tipo="clarete"] { --tipo: #e59a98; }
+  .vino[data-tipo="espumoso"], .vino[data-tipo="cava"] { --tipo: color-mix(in srgb, var(--c-acento) 70%, #fff); }
+  .vino-foto { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: radial-gradient(circle at 50% 35%, color-mix(in srgb, var(--tipo) 30%, var(--negro)), var(--negro) 72%); }
+  .vino-foto img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .vino:hover .vino-foto img { transform: scale(1.04); }
+  .vino-botella { position: absolute; inset: 12% 0 6%; margin: auto; height: 82%; width: auto; color: var(--tipo); }
+  .vino-marca { position: absolute; top: 0; left: 0; padding: .45rem .8rem; background: var(--c-acento); color: var(--negro); font-size: .62rem; font-weight: 700; text-transform: uppercase; letter-spacing: .2em; }
+  .vino-etiqueta { display: flex; align-items: flex-end; justify-content: space-between; gap: .75rem; margin-top: 1.25rem; padding-bottom: .9rem; border-bottom: 1px solid var(--filete-oro); }
+  .vino-tipo { display: inline-flex; align-items: center; gap: .55rem; font-size: .66rem; font-weight: 600; text-transform: uppercase; letter-spacing: .22em; }
+  .vino-tipo::before { content: ""; flex: none; width: .7rem; height: .7rem; border-radius: 50%; background: var(--tipo); box-shadow: 0 0 0 1px var(--filete-oro); }
+  .vino-anada { font-family: var(--fuente-titulos); font-style: italic; font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: .9; color: var(--c-acento); font-variant-numeric: lining-nums; }
+  .vino-nombre { margin-top: 1rem; font-size: clamp(1.25rem, 2.2vw, 1.75rem); line-height: 1.12; }
+  .vino-variedad { margin-top: .45rem; font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .16em; opacity: .65; }
+  .vino-texto { margin-top: .75rem; font-size: .95rem; opacity: .8; }
+  .vino-precio { margin-top: auto; padding-top: 1rem; font-family: var(--fuente-titulos); font-size: 1.45rem; color: var(--c-acento); font-variant-numeric: lining-nums tabular-nums; }
+  @media (max-width: 479px) { .vino-texto { font-size: .86rem; } .vino-etiqueta { flex-direction: column-reverse; align-items: flex-start; } }
+
+  /* Enoturismo */
+  .visitas { margin-top: 2.5rem; border-top: 1px solid var(--filete-oro); }
+  .visita { padding-block: 1.6rem; border-bottom: 1px solid var(--filete-oro); }
+  .visita-cabeza { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem 1.5rem; }
+  .visita-nombre { min-width: 0; font-size: clamp(1.4rem, 2.4vw, 1.9rem); color: var(--c-primario); }
+  .visita-precio { flex: none; font-family: var(--fuente-titulos); font-size: 1.5rem; color: var(--oro-legible); white-space: nowrap; font-variant-numeric: lining-nums; }
+  .visita-duracion { display: inline-flex; align-items: center; gap: .45rem; margin-top: .5rem; font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .2em; color: var(--oro-legible); }
+  .visita-texto { margin-top: .55rem; max-width: 38rem; opacity: .85; }
+  .nota { margin-top: 1.25rem; font-family: var(--fuente-titulos); font-style: italic; font-size: 1.05rem; opacity: .8; }
+
+  /* Puntos de venta (banda de oro) */
+  .puntos { display: grid; gap: 0 3rem; }
+  @media (min-width: 640px) { .puntos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .punto { display: grid; grid-template-columns: auto 1fr; gap: 1.25rem; padding-block: 1.75rem; border-top: 1px solid color-mix(in srgb, var(--negro) 28%, transparent); }
+  .punto-icono { display: grid; place-items: center; width: 3.25rem; height: 3.25rem; border: 1px solid var(--negro); border-radius: 50%; }
+  .punto-titulo { font-size: 1.5rem; line-height: 1.15; }
+  .punto-texto { margin-top: .4rem; opacity: .85; }
+  .punto-enlace { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .2em; text-decoration: none; border-bottom: 1px solid currentColor; }
+
+  /* Galería: mosaico de borde a borde, sin márgenes */
+  .mosaico { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: dense; gap: 3px; }
+  @media (min-width: 768px) { .mosaico { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .mosaico li { position: relative; aspect-ratio: 1; overflow: hidden; background: var(--vino-oscuro); }
+  .mosaico li:first-child { grid-column: span 2; }
+  .mosaico li:nth-child(7n + 6) { grid-column: span 2; aspect-ratio: 2 / 1; }
+  @media (min-width: 768px) { .mosaico li:first-child { grid-row: span 2; aspect-ratio: auto; } }
+  .mosaico img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .mosaico li:hover img { transform: scale(1.03); }
+
+  /* Opiniones */
+  .opinion-grande { max-width: 62rem; margin-inline: auto; text-align: center; }
+  .opinion-grande::before { content: "\201C" / ""; display: block; height: 3.5rem; font-family: var(--fuente-titulos); font-size: 7rem; line-height: 1; color: var(--c-acento); }
+  .opinion-grande blockquote { font-family: var(--fuente-titulos); font-style: italic; font-size: clamp(1.65rem, 3.6vw, 3.1rem); line-height: 1.22; }
+  .opinion-autor { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .4rem 1rem; margin-top: 1.75rem; font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .24em; }
+  .opinion-nota { color: var(--c-acento); font-weight: 400; }
+  .opiniones-resto { display: grid; gap: 2.5rem; margin-top: 4.5rem; }
+  @media (min-width: 768px) { .opiniones-resto { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem; } }
+  @media (min-width: 1280px) { .opiniones-resto--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .opiniones-resto figure { padding-top: 1.75rem; border-top: 1px solid var(--filete-oro); }
+  .opiniones-resto blockquote { font-family: var(--fuente-titulos); font-style: italic; font-size: 1.3rem; line-height: 1.45; }
+  .opiniones-resto .opinion-autor { justify-content: flex-start; margin-top: 1.1rem; }
+
+  /* Preguntas */
+  .faq-rejilla { display: grid; gap: 1rem; }
+  @media (min-width: 1024px) { .faq-rejilla { grid-template-columns: 5fr 7fr; gap: 6rem; align-items: start; } .faq-rejilla .titular { position: sticky; top: calc(var(--alto-cabecera) + 2rem); } }
+  .faq-lista { border-top: 1px solid var(--filete-oro); }
+  .faq { border-bottom: 1px solid var(--filete-oro); }
+  .faq summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1.25rem; min-height: 3rem; padding-block: 1.4rem; font-family: var(--fuente-titulos); font-size: clamp(1.2rem, 2vw, 1.5rem); line-height: 1.25; color: var(--c-primario); }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq-signo { flex: none; display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border: 1px solid var(--filete-oro); border-radius: 50%; font-size: 1.3rem; line-height: 1; color: var(--oro-legible); transition: transform .2s ease, background-color .2s ease; }
+  .faq[open] .faq-signo { transform: rotate(45deg); background: var(--c-acento); color: var(--negro); border-color: var(--c-acento); }
+  .faq-respuesta { padding: 0 3.5rem 1.6rem 0; max-width: 44rem; opacity: .85; }
+
+  /* Contacto */
+  .contacto-cuerpo { display: grid; gap: 3rem; }
+  @media (min-width: 1280px) { .contacto-cuerpo { grid-template-columns: 5fr 7fr; gap: 4rem; } }
+  .vias li a, .vias li > div { display: flex; align-items: flex-start; gap: 1rem; padding-block: 1.1rem; border-bottom: 1px solid var(--filete-claro); text-decoration: none; }
+  .vias li:first-child > * { border-top: 1px solid var(--filete-claro); }
+  .vias-etiqueta { display: block; font-size: .66rem; font-weight: 600; text-transform: uppercase; letter-spacing: .22em; color: var(--c-acento); }
+  .vias-dato { display: block; margin-top: .15rem; font-family: var(--fuente-titulos); font-size: 1.3rem; line-height: 1.3; overflow-wrap: anywhere; }
+  .vias-dato--pequeno { font-family: var(--fuente-texto); font-size: .98rem; opacity: .85; }
+  .vias a:hover .vias-dato { color: var(--c-acento); }
+
+  /* Formulario (sobre fondo oscuro o claro) */
+  .formulario-fila { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); }
+  .formulario-fila--3 { grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); }
+  .campo { min-width: 0; }
+  .campo label { font-size: .66rem; font-weight: 600; text-transform: uppercase; letter-spacing: .2em; }
+  .campo input, .campo textarea, .campo select { width: 100%; min-width: 0; max-width: 100%; min-height: 3rem; font: inherit; color: inherit; padding: .7rem .85rem; border: 1px solid color-mix(in srgb, currentColor 28%, transparent); border-radius: 0; background: color-mix(in srgb, currentColor 5%, transparent); }
+  .campo select option { color: #1c1416; }
+  .campo input:focus, .campo textarea:focus, .campo select:focus { border-color: var(--c-acento); }
+  .banda--negro .campo label, .banda--vino .campo label { color: var(--c-acento); }
+  .banda--negro .campo input, .banda--negro .campo select, .banda--vino .campo input { color-scheme: dark; }
+  .formulario .btn { justify-self: start; }
+
+  /* Lista genérica con filetes (apartado de texto) */
+  .lista-filetes { margin-top: 2rem; border-top: 1px solid var(--filete-oro); }
+  .lista-filetes li { padding-block: 1.1rem; border-bottom: 1px solid var(--filete-oro); }
+
+  /* Pie burdeos muy oscuro con columnas y aviso de consumo responsable */
+  .pie--bodega { padding-top: 0; background: var(--vino-oscuro); color: var(--claro); }
+  .pie--bodega .pie-arriba { padding-block: 4.5rem 3rem; display: grid; gap: 3rem; }
+  @media (min-width: 768px) { .pie--bodega .pie-arriba { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1280px) { .pie--bodega .pie-arriba { grid-template-columns: 4fr 3fr 3fr 2fr; gap: 4rem; } }
+  .pie--bodega .pie-nombre { font-family: var(--fuente-titulos); font-weight: 400; font-size: clamp(1.7rem, 3vw, 2.3rem); text-transform: uppercase; letter-spacing: .14em; line-height: 1.15; }
+  .pie--bodega .pie-eslogan { margin-top: 1rem; max-width: 34ch; font-family: var(--fuente-titulos); font-style: italic; font-size: 1.15rem; opacity: .8; }
+  .pie--bodega .pie-titulo { color: var(--c-acento); opacity: 1; font-size: .68rem; font-weight: 600; letter-spacing: .26em; margin-bottom: 1rem; }
+  .pie--bodega .pie-lista { gap: .6rem; }
+  .pie--bodega .pie-lista a { display: inline-flex; min-height: 1.75rem; align-items: center; }
+  .pie--bodega .pie-lista a:hover { color: var(--c-acento); }
+  .pie-edad { display: flex; align-items: center; justify-content: center; gap: .9rem; padding: 1.25rem var(--margen); border-block: 1px solid var(--filete-oro); text-align: center; font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .22em; color: var(--c-acento); }
+  .pie--bodega .pie-legal { margin-top: 0; border-top: 0; }
+  .pie-noexpertise a { text-decoration: underline; text-underline-offset: 3px; }
+
+  /* Páginas sueltas */
+  .texto-largo h2 { font-family: var(--fuente-titulos); font-weight: 400; font-size: 1.6rem; color: var(--c-primario); }
+  .error-cifra { font-family: var(--fuente-titulos); font-style: italic; font-size: clamp(6rem, 22vw, 14rem); line-height: .9; color: var(--c-acento); }
+}

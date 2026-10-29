@@ -1,0 +1,43 @@
+---
+// Dónde comprar, en banda de oro a todo el ancho: titular a la izquierda y, a la derecha, los puntos de venta
+// (`items` [{titulo, texto, icono, url}]) en dos columnas con filetes oscuros e icono en círculo. `url` opcional:
+// si la hay, enlace «Más información» (o «Pedir» si va a WhatsApp, teléfono o correo). Sin items, solo el titular.
+import { seccion, externo } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const items = s ? s.items.filter((it) => it && it.titulo) : [];
+const textoEnlace = (u: string) => (/^(tel:|mailto:|https:\/\/wa\.me)/.test(u) ? 'Pedir' : u.startsWith('/#') ? 'Escríbenos' : 'Más información');
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} fondo="oro">
+      <div class:list={['grid gap-4', { 'lg:grid-cols-[4fr_8fr] lg:gap-20': items.length > 0 }]}>
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        {items.length > 0 && (
+          <ul class="puntos">
+            {items.map((it) => (
+              <li class="punto">
+                <span class="punto-icono" aria-hidden="true">
+                  <Icono nombre={it.icono || 'botella'} tam={24} />
+                </span>
+                <div class="min-w-0">
+                  <h3 class="punto-titulo">{it.titulo}</h3>
+                  {it.texto && <p class="punto-texto">{it.texto}</p>}
+                  {it.url && (
+                    <a class="punto-enlace mt-2" href={it.url} {...(externo(it.url) && { rel: 'noopener', target: '_blank' })}>
+                      {textoEnlace(it.url)} <Icono nombre="flecha" tam={15} />
+                    </a>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </Seccion>
+  )
+}

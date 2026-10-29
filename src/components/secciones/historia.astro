@@ -1,0 +1,54 @@
+---
+// Historia de la bodega, en banda burdeos: arriba, texto (antetítulo, título, `declaracion` en cursiva dorada y
+// `texto` en párrafos) junto a la foto a sangre (`imagen`, toca el borde derecho de la ventana); debajo, la línea de
+// tiempo de `hitos` [{anio, titulo, texto}]: vertical en móvil y horizontal desde tableta (se desliza si hay muchos).
+// Sin foto, el texto ocupa el ancho; sin hitos, no hay línea de tiempo.
+import { seccion, parrafos } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Seccion from '../ui/Seccion.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const hitos = s ? s.hitos : [];
+const hayTexto = !!(s && (s.antetitulo || s.titulo || s.declaracion || s.texto));
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} fondo="vino" relleno={false} contenedor={false}>
+      {(hayTexto || s.imagen) && (
+        <div class:list={['partida partida--foto-der', { 'partida--sola': !s.imagen }]}>
+          {s.imagen && (
+            <div class="partida-foto">
+              <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={1400} />
+            </div>
+          )}
+          <div class="partida-texto partida-texto--izq">
+            {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+            {s.titulo && <h2 class="titulo">{s.titulo}</h2>}
+            {s.declaracion && <p class="declaracion">{s.declaracion}</p>}
+            {parrafos(s.texto).length > 0 && (
+              <div class="parrafos">
+                {parrafos(s.texto).map((p) => <p>{p}</p>)}
+              </div>
+            )}
+            {s.cta?.url && <a class="btn mt-10" href={s.cta.url}>{s.cta.texto}</a>}
+          </div>
+        </div>
+      )}
+      {hitos.length > 0 && (
+        <div class:list={['contenedor hitos-banda', { 'pt-16 md:pt-24': !hayTexto && !s.imagen }]}>
+          <ol class="hitos" aria-label={s.titulo ? `${s.titulo}: fechas` : 'Nuestra historia'}>
+            {hitos.map((h) => (
+              <li class="hito">
+                {h.anio && <span class="hito-anio">{h.anio}</span>}
+                {h.titulo && <h3 class="hito-titulo">{h.titulo}</h3>}
+                {h.texto && <p class="hito-texto">{h.texto}</p>}
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+    </Seccion>
+  )
+}

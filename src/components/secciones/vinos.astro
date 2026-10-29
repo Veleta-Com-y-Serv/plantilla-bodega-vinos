@@ -1,0 +1,93 @@
+---
+// Vinos, en banda negra: titular partido y rejilla de botellas a todo el ancho (2 columnas en móvil, 3 en escritorio).
+// `vinos` [{nombre, tipo, anada, variedad, texto, precio, imagen, destacado}]: cada vino con su foto vertical (sin
+// foto, una botella dibujada del color de su tipo), etiqueta con el tipo y la añada en cursiva dorada, variedades,
+// texto y precio. `tipo` da el color (Tinto, Blanco, Rosado, Espumoso o el que sea) y, si hay dos tipos o más, el
+// filtro de arriba (sin JavaScript: botones de radio y CSS). `destacado: true` pone la marca `marca_destacado`.
+// Sin precio no hay precio; sin vinos, solo el titular y el botón.
+import { seccion, agrupar, clave, externo } from '../../data/site';
+import { altFicha } from '../../lib/seo';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const { id } = Astro.props;
+const s = seccion(id);
+const vinos = s ? s.vinos : [];
+const tipos = agrupar(vinos, (v) => v.tipo).filter((g) => g.grupo).map((g) => ({ nombre: g.grupo, clave: clave(g.grupo) }));
+const conFiltro = tipos.length > 1;
+const marca = (s?.marca_destacado as string | undefined)?.trim() || 'Recomendado';
+const nombreFiltro = `filtro-${id}`;
+// Una regla por tipo: con su botón marcado, se ocultan los vinos de los demás tipos.
+const reglas = conFiltro
+  ? tipos
+      .map((t, i) => `[data-vinos="${id}"]:has(#${nombreFiltro}-${i + 1}:checked) .vino:not([data-tipo="${t.clave}"]){display:none}`)
+      .join('')
+  : '';
+---
+
+{
+  s && (
+    <Seccion id={id} fondo="negro">
+      <Titular alinear="partido" antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      {vinos.length > 0 && (
+        <div data-vinos={id}>
+          {conFiltro && (
+            <>
+              <style is:inline set:html={reglas} />
+              <fieldset class="filtro">
+                <legend class="sr-only">Filtrar por tipo de vino</legend>
+                <input class="sr-only" type="radio" name={nombreFiltro} id={`${nombreFiltro}-0`} checked />
+                <label for={`${nombreFiltro}-0`}>Todos</label>
+                {tipos.map((t, i) => (
+                  <>
+                    <input class="sr-only" type="radio" name={nombreFiltro} id={`${nombreFiltro}-${i + 1}`} />
+                    <label for={`${nombreFiltro}-${i + 1}`}>{t.nombre}</label>
+                  </>
+                ))}
+              </fieldset>
+            </>
+          )}
+          <ul class="vinos-lista">
+            {vinos.map((v) => (
+              <li class="vino" data-tipo={clave(v.tipo)}>
+                <div class="vino-foto">
+                  {v.imagen ? (
+                    <Imagen src={v.imagen} alt={altFicha(v)} ancho={750} alto={1000} />
+                  ) : (
+                    <svg class="vino-botella" viewBox="0 0 60 200" aria-hidden="true">
+                      <path d="M24 4h12v46c0 8 14 16 14 36v104a6 6 0 0 1-6 6H16a6 6 0 0 1-6-6V86c0-20 14-28 14-36z" fill="currentColor" />
+                      <rect x="10" y="112" width="40" height="44" fill="none" stroke="var(--c-acento)" stroke-width="1.5" />
+                      <rect x="22" y="2" width="16" height="18" fill="var(--c-acento)" />
+                    </svg>
+                  )}
+                  {v.destacado && <span class="vino-marca">{marca}</span>}
+                </div>
+                {(v.tipo || v.anada) && (
+                  <p class="vino-etiqueta">
+                    {v.tipo ? <span class="vino-tipo">{v.tipo}</span> : <span />}
+                    {v.anada && (
+                      <span class="vino-anada">
+                        <span class="sr-only">Añada </span>
+                        {v.anada}
+                      </span>
+                    )}
+                  </p>
+                )}
+                <h3 class="vino-nombre">{v.nombre}</h3>
+                {v.variedad && <p class="vino-variedad">{v.variedad}</p>}
+                {v.texto && <p class="vino-texto">{v.texto}</p>}
+                {v.precio && <p class="vino-precio">{v.precio}</p>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+      {s.cta?.url && (
+        <p class="mt-14 md:mt-20">
+          <a class="btn" href={s.cta.url} {...(externo(s.cta.url) && { rel: 'noopener', target: '_blank' })}>{s.cta.texto}</a>
+        </p>
+      )}
+    </Seccion>
+  )
+}

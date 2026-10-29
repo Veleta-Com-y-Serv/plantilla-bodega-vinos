@@ -1,0 +1,82 @@
+---
+// Contacto y reserva de visitas, en banda negra partida: foto a sangre a la izquierda (`imagen`, arriba en móvil; sin
+// foto, todo a lo ancho) y, a la derecha, el titular, las vías de contacto con filetes (teléfono, WhatsApp, email,
+// dirección con enlace al mapa y horario de site.yaml → contacto) y el formulario de visita (fecha, personas y, si
+// hay visitas de enoturismo, cuál), que abre el correo (mailto).
+import { seccion, site, tel, whatsapp, mapa, visitasActivas } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const c = site.contacto;
+const opciones = visitasActivas().map((v) => v.nombre);
+const hayVias = !!(c.telefono || c.whatsapp || c.email || c.direccion || c.horario);
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} fondo="negro" relleno={false} contenedor={false}>
+      <div class:list={['partida partida--estrecha', { 'partida--sola': !s.imagen }]}>
+        {s.imagen && (
+          <div class="partida-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1000} alto={1400} />
+          </div>
+        )}
+        <div class:list={['partida-texto', { 'partida-texto--der': s.imagen }]}>
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+          <div class:list={['contacto-cuerpo', { '!grid-cols-1': !hayVias }]}>
+            {hayVias && (
+              <ul class="vias">
+                {c.telefono && (
+                  <li>
+                    <a href={tel(c.telefono)}>
+                      <Icono nombre="telefono" class="mt-1 shrink-0 text-acento" />
+                      <span><span class="vias-etiqueta">Teléfono</span><span class="vias-dato">{c.telefono}</span></span>
+                    </a>
+                  </li>
+                )}
+                {c.whatsapp && (
+                  <li>
+                    <a href={whatsapp(c.whatsapp, `Hola, os escribo desde la web de ${site.nombre}`)} rel="noopener" target="_blank">
+                      <Icono nombre="whatsapp" class="mt-1 shrink-0 text-acento" />
+                      <span><span class="vias-etiqueta">WhatsApp</span><span class="vias-dato">{c.whatsapp}</span></span>
+                    </a>
+                  </li>
+                )}
+                {c.email && (
+                  <li>
+                    <a href={`mailto:${c.email}`}>
+                      <Icono nombre="correo" class="mt-1 shrink-0 text-acento" />
+                      <span class="min-w-0"><span class="vias-etiqueta">Email</span><span class="vias-dato">{c.email}</span></span>
+                    </a>
+                  </li>
+                )}
+                {c.direccion && (
+                  <li>
+                    <a href={mapa(c.direccion)} rel="noopener" target="_blank">
+                      <Icono nombre="mapa" class="mt-1 shrink-0 text-acento" />
+                      <span><span class="vias-etiqueta">Cómo llegar</span><span class="vias-dato">{c.direccion}</span></span>
+                    </a>
+                  </li>
+                )}
+                {c.horario && (
+                  <li>
+                    <div>
+                      <Icono nombre="reloj" class="mt-1 shrink-0 text-acento" />
+                      <span><span class="vias-etiqueta">Horario</span><span class="vias-dato vias-dato--pequeno">{c.horario}</span></span>
+                    </div>
+                  </li>
+                )}
+              </ul>
+            )}
+            <FormularioContacto visita opciones={opciones} prefijo={`c-${Astro.props.id}`} boton="Enviar" asunto={`Visita o pedido en ${site.nombre}`} />
+          </div>
+        </div>
+      </div>
+    </Seccion>
+  )
+}
