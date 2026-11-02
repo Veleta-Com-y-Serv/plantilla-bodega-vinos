@@ -4,12 +4,15 @@
 // foto, una botella dibujada del color de su tipo), etiqueta con el tipo y la añada en cursiva dorada, variedades,
 // texto y precio. `tipo` da el color (Tinto, Blanco, Rosado, Espumoso o el que sea) y, si hay dos tipos o más, el
 // filtro de arriba (sin JavaScript: botones de radio y CSS). `destacado: true` pone la marca `marca_destacado`.
+// Los vinos con `detalle` tienen página propia (/vinos/<slug>/) y enlazan desde su nombre; los demás, como antes.
 // Sin precio no hay precio; sin vinos, solo el titular y el botón.
 import { seccion, agrupar, clave, externo } from '../../data/site';
 import { altFicha } from '../../lib/seo';
 import Seccion from '../ui/Seccion.astro';
 import Titular from '../ui/Titular.astro';
 import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+import { enlaceDe } from '../../lib/paginas';
 interface Props { id: string }
 const { id } = Astro.props;
 const s = seccion(id);
@@ -74,10 +77,11 @@ const reglas = conFiltro
                     )}
                   </p>
                 )}
-                <h3 class="vino-nombre">{v.nombre}</h3>
+                <h3 class="vino-nombre">{enlaceDe(v) ? <a href={enlaceDe(v)} class="vino-enlace">{v.nombre}</a> : v.nombre}</h3>
                 {v.variedad && <p class="vino-variedad">{v.variedad}</p>}
                 {v.texto && <p class="vino-texto">{v.texto}</p>}
                 {v.precio && <p class="vino-precio">{v.precio}</p>}
+                {enlaceDe(v) && <span class="vino-ver" aria-hidden="true">Ver ficha <Icono nombre="flecha" tam={14} /></span>}
               </li>
             ))}
           </ul>

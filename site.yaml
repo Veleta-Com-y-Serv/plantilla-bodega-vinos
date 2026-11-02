@@ -75,12 +75,88 @@ secciones:
     texto: "Seis vinos, todos de uva propia. Precios por botella en la tienda de la bodega."
     marca_destacado: Recomendado
     vinos:
-      - { nombre: Ocáriz Clarete, tipo: Rosado, anada: "2024", variedad: "Garnacha y viura", texto: "El vino de la fiesta de Haro: fresco, ligero y con fruta roja.", precio: "8,50 €", imagen: /fotos/vino-rosado.jpg, destacado: false }
-      - { nombre: Ocáriz Blanco Barrica, tipo: Blanco, anada: "2023", variedad: "Viura y malvasía", texto: "Fermentado en barrica de roble francés, con sus lías durante seis meses.", precio: "14,00 €", imagen: /fotos/vino-blanco.jpg, destacado: false }
+      - nombre: Ocáriz Clarete
+        tipo: Rosado
+        anada: "2024"
+        variedad: "Garnacha y viura"
+        texto: "El vino de la fiesta de Haro: fresco, ligero y con fruta roja."
+        precio: "8,50 €"
+        imagen: /fotos/vino-rosado.jpg
+        destacado: false
+        detalle: |
+          El clarete es el vino de las fiestas de Haro y, en nuestra casa, el que se bebe sin ceremonia. Se elabora con garnacha y viura de las viñas más jóvenes, que se vendimian a mano y se prensan con una maceración muy breve para que el mosto tome solo el color justo, ese rosa intenso que da nombre al estilo.
+
+          Fermenta despacio y a baja temperatura, sin paso por madera, para guardar el aroma a fresa, frambuesa y flor blanca. En boca es ligero, fresco y con una acidez que invita al segundo vaso. Se bebe bien frío, solo o acompañando aperitivos, ensaladas, arroces, verduras a la brasa y embutidos de la zona.
+
+          Es un vino pensado para compartir en la mesa de verano, en la merienda de la viña o en la comida familiar del domingo. Si vienes a la visita con cata, lo probamos al final, cuando el paladar pide algo vivo después de los tintos.
+
+          Lo embotellamos en cuanto está limpio y listo, así que conviene tomarlo joven, durante el año siguiente a la añada. En la tienda de la bodega lo tenemos siempre a mano, y si lo pides por WhatsApp te lo preparamos en caja mixta con otros vinos de la casa.
+      - nombre: Ocáriz Blanco Barrica
+        tipo: Blanco
+        anada: "2023"
+        variedad: "Viura y malvasía"
+        texto: "Fermentado en barrica de roble francés, con sus lías durante seis meses."
+        precio: "14,00 €"
+        imagen: /fotos/vino-blanco.jpg
+        destacado: false
+        detalle: |
+          Este blanco nace de viura y malvasía, dos uvas de la Rioja Alta que aquí tratamos con paciencia. Tras la vendimia, el mosto fermenta directamente en barricas de roble francés, y el vino se queda en ellas con sus lías durante seis meses, removiéndolo de vez en cuando para que gane cuerpo y untuosidad sin perder frescura.
+
+          El resultado es un blanco de color pajizo dorado, con recuerdos de manzana madura, almendra, hinojo y un toque de vainilla muy fino. En boca es redondo, con una acidez que lo mantiene vivo y un final largo y ligeramente salino. No busca parecerse a un joven de depósito: es un vino de mesa con carácter.
+
+          Acompaña muy bien pescados al horno, verduras asadas, setas, quesos tiernos y platos de ave con salsas cremosas. Sírvelo fresco, no helado, para que se abran los aromas de la barrica.
+
+          Hacemos pocas botellas de cada añada, porque la barrica manda y el viñedo no da más. Si te gusta el blanco con estructura, es el que recomendamos probar en la visita clásica, después del clarete y antes de entrar en los tintos del calado.
       - { nombre: Ocáriz Joven, tipo: Tinto, anada: "2024", variedad: Tempranillo, texto: "Maceración carbónica, como se ha hecho siempre en la Rioja Alta.", precio: "7,50 €", imagen: /fotos/vino-joven.jpg, destacado: false }
-      - { nombre: Ocáriz Reserva, tipo: Tinto, anada: "2019", variedad: "Tempranillo y graciano", texto: "Dos años en barrica en el calado y uno en botella antes de salir.", precio: "21,00 €", imagen: /fotos/vino-reserva.jpg, destacado: true }
-      - { nombre: Gran Reserva Celestino, tipo: Tinto, anada: "2015", variedad: "Tempranillo, garnacha y mazuelo", texto: "Solo en las mejores añadas. Elegante, largo, para guardar.", precio: "39,00 €", imagen: /fotos/vino-gran-reserva.jpg, destacado: false }
-      - { nombre: Ocáriz Brut Nature, tipo: Espumoso, anada: "2021", variedad: "Viura y tempranillo blanco", texto: "Método tradicional, treinta meses en rima en el calado.", precio: "18,50 €", imagen: /fotos/vino-espumoso.jpg, destacado: false }
+      - nombre: Ocáriz Reserva
+        tipo: Tinto
+        anada: "2019"
+        variedad: "Tempranillo y graciano"
+        texto: "Dos años en barrica en el calado y uno en botella antes de salir."
+        precio: "21,00 €"
+        imagen: /fotos/vino-reserva.jpg
+        destacado: true
+        imagenes: "/fotos/enoturismo.jpg; /fotos/galeria-2.jpg"
+        detalle: |
+          El Reserva es el vino que mejor cuenta cómo trabajamos. Procede de las cepas viejas de tempranillo y graciano, vendimiadas a mano en cajas pequeñas y seleccionadas en la mesa de la bodega antes de entrar en el depósito. La fermentación es lenta, con remontados suaves, y el vino pasa después dos años en barrica en el calado, donde la piedra mantiene la humedad y la temperatura sin ayuda de nadie.
+
+          Tras la crianza descansa un año más en botella antes de salir a la venta, y por eso nunca lo sacamos con prisa. En la copa muestra un rojo cereza oscuro con reflejos teja, aromas de fruta madura, cuero, especias dulces y tabaco, y en boca es sedoso, con taninos pulidos y un final persistente.
+
+          Va muy bien con cordero asado, carnes a la parrilla, guisos de caza y quesos curados. Conviene abrirlo un rato antes y servirlo sin que esté demasiado caliente.
+
+          Es el vino que más nos piden en la tienda y el que casi siempre se lleva quien baja al calado y lo prueba entre barricas. También es una buena botella para regalar, porque tiene la sobriedad de un clásico riojano.
+      - nombre: Gran Reserva Celestino
+        tipo: Tinto
+        anada: "2015"
+        variedad: "Tempranillo, garnacha y mazuelo"
+        texto: "Solo en las mejores añadas. Elegante, largo, para guardar."
+        precio: "39,00 €"
+        imagen: /fotos/vino-gran-reserva.jpg
+        destacado: false
+        detalle: |
+          El Gran Reserva Celestino lo hacemos solo cuando la añada lo merece, y por eso no todos los años hay botellas. Lleva un nombre propio de la casa, y se elabora con tempranillo, garnacha y mazuelo de las parcelas más viejas, en rendimientos muy bajos y con una selección de racimos muy estricta.
+
+          Pasa un largo tiempo en barricas del calado, que se van revisando una a una, y después reposa en botella hasta que decidimos que está redondo. Es un vino de color granate profundo, con aromas complejos de fruta compotada, cacao, café, madera noble y sotobosque. En boca es elegante, largo, equilibrado, con taninos finos que se funden con la acidez.
+
+          Es un vino para guardar y para abrir en una ocasión especial, mejor decantado y con calma. Combina con asados de caza, carnes rojas de calidad, setas, trufa y quesos de larga curación, pero también se disfruta solo, sin prisa, al final de la comida.
+
+          Si quieres probarlo, pregúntanos al reservar: en las visitas privadas y en la cata de grupo lo servimos cuando hay botellas disponibles.
+      - nombre: Ocáriz Brut Nature
+        tipo: Espumoso
+        anada: "2021"
+        variedad: "Viura y tempranillo blanco"
+        texto: "Método tradicional, treinta meses en rima en el calado."
+        precio: "18,50 €"
+        imagen: /fotos/vino-espumoso.jpg
+        destacado: false
+        detalle: |
+          Nuestro espumoso nace de viura y tempranillo blanco, dos uvas que en la Rioja Alta dan vinos base frescos y de buena acidez. Se elabora por el método tradicional: la segunda fermentación ocurre dentro de la propia botella y el vino reposa en rima, tumbado en el calado, durante treinta meses, en contacto con sus lías.
+
+          Es un brut nature, es decir, sin licor de expedición ni azúcar añadido, de modo que lo que hay en la copa es solo la uva y el tiempo. Tiene un color amarillo pálido con burbuja fina y persistente, aromas de manzana verde, pan tostado, frutos secos y un fondo de flor blanca. En boca es seco, vivo y muy limpio, con un final cremoso.
+
+          Sírvelo bien frío, en copa ancha mejor que en flauta, para que se aprecien los aromas. Va muy bien con aperitivos, ostras, fritos, jamón, quesos suaves y arroces, y también como brindis en celebraciones.
+
+          Hacemos pocas botellas, porque el calado tiene su límite y cada una se remueve a mano. Es un vino que sorprende a quien piensa que en Rioja solo hay tintos.
     cta: { texto: Pedir vino por WhatsApp, url: "https://wa.me/34633417209?text=Hola%2C%20quiero%20pedir%20vino" }
 
   enoturismo:

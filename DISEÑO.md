@@ -64,3 +64,8 @@ legible, sin logotipos, sin caras.
 - Volver al fondo marfil dominante con filetes de `restaurante`: aquí manda lo oscuro y el oro.
 - Encajonar secciones en una columna estrecha o meter vinos en tarjetas blancas.
 - Inventar precios, añadas o premios: si no los hay, el componente no pinta nada.
+
+## Páginas propias (fichas)
+Con la misma piel que la portada: cabecera y pie de la plantilla, migas (Inicio › Sección › Elemento), hero con la foto del
+elemento (sin foto, su icono), `detalle` en párrafos, tabla de datos, caja de contacto, galería (`imagenes`) y otros elementos
+de la misma lista.

@@ -161,7 +161,7 @@
   .vinos-lista { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem 1rem; }
   @media (min-width: 768px) { .vinos-lista { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3.5rem 1.5rem; } }
   @media (min-width: 1024px) { .vinos-lista { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4.5rem 3rem; } }
-  .vino { --tipo: var(--c-acento); min-width: 0; display: flex; flex-direction: column; }
+  .vino { --tipo: var(--c-acento); position: relative; min-width: 0; display: flex; flex-direction: column; }
   .vino[data-tipo="tinto"] { --tipo: color-mix(in srgb, var(--c-primario) 75%, #fff 10%); }
   .vino[data-tipo="blanco"] { --tipo: #e8d898; }
   .vino[data-tipo="rosado"], .vino[data-tipo="clarete"] { --tipo: #e59a98; }
@@ -178,6 +178,12 @@
   .vino-nombre { margin-top: 1rem; font-size: clamp(1.25rem, 2.2vw, 1.75rem); line-height: 1.12; }
   .vino-variedad { margin-top: .45rem; font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .16em; opacity: .65; }
   .vino-texto { margin-top: .75rem; font-size: .95rem; opacity: .8; }
+  .vino-enlace { text-decoration: none; color: inherit; }
+  .vino-enlace::after { content: ""; position: absolute; inset: 0; }
+  .vino-enlace:focus-visible { outline: none; }
+  .vino:has(.vino-enlace:focus-visible) { outline: 2px solid var(--c-acento); outline-offset: 6px; }
+  .vino-ver { display: inline-flex; align-items: center; gap: .4rem; margin-top: .6rem; font-size: .66rem; font-weight: 600; text-transform: uppercase; letter-spacing: .2em; color: var(--c-acento); }
+  .vino:hover .vino-nombre { color: var(--c-acento); }
   .vino-precio { margin-top: auto; padding-top: 1rem; font-family: var(--fuente-titulos); font-size: 1.45rem; color: var(--c-acento); font-variant-numeric: lining-nums tabular-nums; }
   @media (max-width: 479px) { .vino-texto { font-size: .86rem; } .vino-etiqueta { flex-direction: column-reverse; align-items: flex-start; } }
 

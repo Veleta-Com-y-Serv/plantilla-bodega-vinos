@@ -14,7 +14,7 @@ export interface Noticia { fecha: string; titulo: string; texto?: string; url?: 
 /** Hito de la historia (línea de tiempo). `anio` como cadena («1921»). */
 export interface Hito { anio: string; titulo: string; texto: string }
 /** Vino. `tipo` agrupa y filtra (Tinto, Blanco, Rosado, Espumoso…); `precio` y `anada` siempre como cadena. */
-export interface Vino { nombre: string; tipo: string; anada: string; variedad: string; texto: string; precio: string; imagen: string; destacado: boolean }
+export interface Vino { nombre: string; tipo: string; anada: string; variedad: string; texto: string; precio: string; imagen: string; destacado: boolean; detalle?: string; imagenes?: string; slug?: string }
 /** Visita de enoturismo. `precio` como cadena («18 €», «Consultar»). */
 export interface Visita { nombre: string; texto: string; precio: string; duracion: string }
 
@@ -97,6 +97,9 @@ function normalizar(s: Crudo = {}): Seccion {
         precio: texto(v.precio),
         imagen: texto(v.imagen),
         destacado: v.destacado === true,
+        ...(texto(v.detalle) && { detalle: String(v.detalle) }),
+        ...(texto(v.imagenes) && { imagenes: texto(v.imagenes) }),
+        ...(texto(v.slug) && { slug: texto(v.slug) }),
       })),
     visitas: lista<Crudo>(s.visitas)
       .filter((v) => texto(v.nombre))
