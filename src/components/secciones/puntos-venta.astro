@@ -9,7 +9,7 @@ import Icono from '../ui/Icono.astro';
 interface Props { id: string }
 const s = seccion(Astro.props.id);
 const items = s ? s.items.filter((it) => it && it.titulo) : [];
-const textoEnlace = (u: string) => (/^(tel:|mailto:|https:\/\/wa\.me)/.test(u) ? 'Pedir' : u.startsWith('/#') ? 'Escríbenos' : 'Más información');
+const textoEnlace = (u: string) => (/^(tel:|mailto:|https:\/\/wa\.me)/.test(u) ? 'Pedir' : u.startsWith('/') ? 'Escríbenos' : 'Más información');
 ---
 
 {

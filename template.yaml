@@ -21,7 +21,7 @@ secciones:
   - { id: contacto, nombre: Contacto }
 estilo: clasico
 plan_minimo: presencia
-version: 1.1.0
+version: 1.2.0
 base: astrowind
 demo_url: https://demo-plantilla-bodega-vinos.noexpertise.com
 activa: true
@@ -30,6 +30,14 @@ orden: 320
 # Páginas propias (docs/plantillas.md § Fichas por elemento y páginas por zona). Espejo en src/data/fichas.ts.
 fichas:
   - { lista: vinos, campo: vinos, ruta: vinos, nombre: Vino, tipo: Product }
+
+# Varias páginas (docs/plantillas.md § Varias páginas): reparto recomendado al activar «Varias páginas».
+# Inicio se queda con la portada y lo que no esté en ninguna página (aquí, fotos).
+paginas:
+  - { ruta: vinos, titulo: Vinos, secciones: "vinos; puntos-venta" }
+  - { ruta: enoturismo, titulo: Enoturismo, secciones: "enoturismo" }
+  - { ruta: la-bodega, titulo: La bodega, secciones: "historia; opiniones" }
+  - { ruta: contacto, titulo: Contacto, secciones: "preguntas; contacto" }
 
 # Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
 # tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.
